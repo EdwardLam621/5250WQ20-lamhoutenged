@@ -16,7 +16,10 @@
                 WidthRequest="200"
                 HeightRequest="200"
                 />
-
+            <Button
+                Clicked="GameButton_Clicked"
+                Text="Go Redhawks!"
+                />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
