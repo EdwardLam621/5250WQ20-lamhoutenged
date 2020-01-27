@@ -95,6 +95,22 @@ namespace Mine.ViewModels
             return result;
         }
 
+        /// <summary>
+        /// API to update the Data
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<bool> Update(ItemModel data)
+        {
+            var record = await Read(data.Id);
+            if (record == null)
+            {
+                return false;
+            }
+            Dataset.Remove(data);
+            var result = await DataStore.DeleteAsync(data.Id);
+            return result;
+        }
 
         #region Refresh
         // Return True if a refresh is needed
