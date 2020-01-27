@@ -9,5 +9,18 @@
 
         // The Value of the Item
         public int Value { get; set; } = 0;
+
+
+        public bool Update(ItemModel data)
+        {
+            //update the database
+            Name = data.Name;
+            Description = data.Description;
+
+            //update extend
+            Value = data.Value;
+
+            return true;
+        }
     }
 }
