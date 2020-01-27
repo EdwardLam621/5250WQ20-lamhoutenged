@@ -52,6 +52,11 @@ namespace Mine.ViewModels
             {
                 await Delete(data as ItemModel);
             });
+
+            MessagingCenter.Subscribe<ItemUpdatePage, ItemModel>(this, "Update", async (obj, data) =>
+            {
+                await Update(data as ItemModel);
+            });
         }
 
         /// <summary>
@@ -96,7 +101,7 @@ namespace Mine.ViewModels
         }
 
         /// <summary>
-        /// API to update the Data
+        /// API to delete the Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -107,8 +112,10 @@ namespace Mine.ViewModels
             {
                 return false;
             }
-            Dataset.Remove(data);
-            var result = await DataStore.DeleteAsync(data.Id);
+            record.Update(data);
+
+            var result = await DataStore.UpdateAsync(record);
+            
             return result;
         }
 
