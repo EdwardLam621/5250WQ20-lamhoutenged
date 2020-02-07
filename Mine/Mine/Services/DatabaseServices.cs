@@ -44,5 +44,9 @@ namespace Mine
             return Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
+        public Task<int> UpdateAsync(ItemModel item)
+        {
+            return Database.UpdateAsync(item);
+        }
     }
 }
