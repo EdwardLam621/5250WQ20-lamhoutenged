@@ -34,36 +34,11 @@ namespace Mine
             }
         }
 
-        public Task<List<ItemModel>> GetItemsAsync()
+        public Task<int> CreateAsync(ItemModel item)
         {
-            return Database.Table<ItemModel>().ToListAsync();
+            return Database.InsertAsync(item);
         }
 
-        public Task<List<ItemModel>> GetItemsNotDoneAsync()
-        {
-            return Database.QueryAsync<ItemModel>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
-        }
 
-        public Task<ItemModel> GetItemAsync(string id)
-        {
-            return Database.Table<ItemModel>().Where(i => i.Id == id).FirstOrDefaultAsync();
-        }
-
-        public Task<int> SaveItemAsync(ItemModel item)
-        {
-            if (item.Id != null)
-            {
-                return Database.UpdateAsync(item);
-            }
-            else
-            {
-                return Database.InsertAsync(item);
-            }
-        }
-
-        public Task<int> DeleteItemAsync(ItemModel item)
-        {
-            return Database.DeleteAsync(item);
-        }
     }
 }
