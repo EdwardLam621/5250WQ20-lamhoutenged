@@ -5,21 +5,22 @@ using System.Threading.Tasks;
 
 namespace Mine.Services
 {
-    public class MockDataStore<T> : IDataStore<T> where T: new()
+    public class MockDataStore<T> : IDataStore<T> where T : new()
     {
         /// <summary>
         /// The Data List
         /// This is where the items are stored
         /// </summary>
-        public List<T> datalist = new List<T>();
+        public List<T> datalist;
 
         /// <summary>
         /// Constructor for the Storee
         /// </summary>
         public MockDataStore()
         {
+            
         }
-
+        
         /// <summary>
         /// Add the data to the list
         /// </summary>
@@ -67,7 +68,7 @@ namespace Mine.Services
         /// <returns>Record if found else null</returns>
         public async Task<T> ReadAsync(string id)
         {
-            return await Task.FromResult(datalist.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(datalist.FirstOrDefault(s => s.id == id));
         }
 
         /// <summary>
