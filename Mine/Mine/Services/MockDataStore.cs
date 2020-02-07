@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Mine.Services
 {
-    public class MockDataStore : IDataStore<ItemModel>
+    public class MockDataStore<T> : IDataStore<T> where T: new()
     {
         /// <summary>
         /// The Data List
         /// This is where the items are stored
         /// </summary>
-        public List<ItemModel> datalist;
+        public List<T> datalist = new List<T>();
 
         /// <summary>
         /// Constructor for the Storee
@@ -25,7 +25,7 @@ namespace Mine.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for pass, else fail</returns>
-        public async Task<bool> CreateAsync(ItemModel data)
+        public async Task<bool> CreateAsync(T data)
         {
             datalist.Add(data);
 
@@ -37,9 +37,9 @@ namespace Mine.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for pass, else fail</returns>
-        public async Task<bool> UpdateAsync(ItemModel data)
+        public async Task<bool> UpdateAsync(T data)
         {
-            var oldData = datalist.Where((ItemModel arg) => arg.Id == data.Id).FirstOrDefault();
+            var oldData = datalist.Where((T arg) => arg.Id == data.Id).FirstOrDefault();
             datalist.Remove(oldData);
             datalist.Add(data);
 
@@ -54,7 +54,7 @@ namespace Mine.Services
         /// <returns>True for pass, else fail</returns>
         public async Task<bool> DeleteAsync(string id)
         {
-            var oldData = datalist.Where((ItemModel arg) => arg.Id == id).FirstOrDefault();
+            var oldData = datalist.Where((T arg) => arg.Id == id).FirstOrDefault();
             datalist.Remove(oldData);
 
             return await Task.FromResult(true);
@@ -65,7 +65,7 @@ namespace Mine.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Record if found else null</returns>
-        public async Task<ItemModel> ReadAsync(string id)
+        public async Task<T> ReadAsync(string id)
         {
             return await Task.FromResult(datalist.FirstOrDefault(s => s.Id == id));
         }
@@ -75,7 +75,7 @@ namespace Mine.Services
         /// </summary>
         /// <param name="forceRefresh"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<ItemModel>> IndexAsync(bool forceRefresh = false)
+        public async Task<List<T>> IndexAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(datalist);
         }
