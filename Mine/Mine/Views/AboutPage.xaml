@@ -34,7 +34,7 @@
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
-                <Label Text="CPSC 5250 WQ20"></Label>
+                <Label Text="CPSC 5025 WQ20"></Label>
                 <Label Text="Edward Lam "></Label>
                 <Label x:Name="CurrentDateTime"></Label>
             </StackLayout>
