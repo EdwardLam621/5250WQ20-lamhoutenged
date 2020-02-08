@@ -231,5 +231,12 @@ namespace Mine.ViewModels
                 DataStore = DataSource_Mock; 
             } return true; 
         }
+
+        public void WipeDataList()
+        {
+            DataStore.WipeDataList();
+            SetNeedsRefresh(true);
+        }
+
     }
 }
