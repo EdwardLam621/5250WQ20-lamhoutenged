@@ -22,7 +22,10 @@ namespace Mine.ViewModels
         /// <summary>
         /// Connection to the Data store
         /// </summary>
-        public IDataStore<ItemModel> DataStore => DependencyService.Get<IDataStore<ItemModel>>();
+        public IDataStore<ItemModel> DataSource_Mock => DependencyService.Get<IDataStore<ItemModel>>();
+        public IDataStore<ItemModel> DataSource_SQL => DependencyService.Get<IDataStore<ItemModel>>();
+
+        public IDataStore<ItemModel> DataStore;
 
         // Command to force a Load of data
         public Command LoadDatasetCommand { get; set; }
@@ -188,5 +191,17 @@ namespace Mine.ViewModels
             LoadDatasetCommand.Execute(null);
         }
         #endregion Refresh
+
+        public bool SetDataSource(int isSQL) 
+        { 
+            if (isSQL == 1) 
+            { 
+                DataStore = DataSource_SQL; 
+            } 
+            else 
+            { 
+                DataStore = DataSource_Mock; 
+            } return true; 
+        }
     }
 }
