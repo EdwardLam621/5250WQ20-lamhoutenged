@@ -14,5 +14,6 @@ namespace Mine.Services
         Task<bool> DeleteAsync(string id);
         Task<ItemModel> ReadAsync(string id);
         Task<List<ItemModel>> IndexAsync(bool forceRefresh = false);
+        void WipeDataList();
     }
 }
