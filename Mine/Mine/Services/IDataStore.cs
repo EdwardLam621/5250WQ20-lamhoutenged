@@ -13,6 +13,6 @@ namespace Mine.Services
         Task<bool> UpdateAsync(ItemModel Data);
         Task<bool> DeleteAsync(string id);
         Task<ItemModel> ReadAsync(string id);
-        Task<IEnumerable<ItemModel>> IndexAsync(bool forceRefresh = false);
+        Task<List<ItemModel>> IndexAsync(bool forceRefresh = false);
     }
 }
