@@ -10,6 +10,11 @@
         // The Value of the Item
         public int Value { get; set; } = 0;
 
+        public ItemModel()
+        {
+
+        }
+
         // Copy constructor
         public ItemModel(ItemModel data)
         {
