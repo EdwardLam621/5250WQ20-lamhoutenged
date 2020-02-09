@@ -92,6 +92,11 @@ namespace Mine.ViewModels
             {
                 await Update(data as ItemModel);
             });
+
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) => 
+            {
+                SetDataSource(data); 
+            });
         }
 
         /// <summary>
@@ -228,12 +233,18 @@ namespace Mine.ViewModels
         { 
             if (isSQL == 1) 
             { 
-                DataStore = DataSource_SQL; 
+                DataStore = DataSource_SQL;
+                CurrentDataSource = 1;
             } 
             else 
             { 
-                DataStore = DataSource_Mock; 
-            } return true; 
+                DataStore = DataSource_Mock;
+                CurrentDataSource = 0;
+            }S
+
+            SetNeedsRefresh(true);
+
+            return true; 
         }
 
         public void WipeDataList()
