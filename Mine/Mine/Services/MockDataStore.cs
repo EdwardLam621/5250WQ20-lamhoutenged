@@ -97,7 +97,8 @@ namespace Mine.Services
 
         public void WipeDataList()
         {
-
+            datalist.Clear();
+            LoadDefaultData();
         }
 
     }
