@@ -240,7 +240,7 @@ namespace Mine.ViewModels
             { 
                 DataStore = DataSource_Mock;
                 CurrentDataSource = 0;
-            }S
+            }
 
             SetNeedsRefresh(true);
 
