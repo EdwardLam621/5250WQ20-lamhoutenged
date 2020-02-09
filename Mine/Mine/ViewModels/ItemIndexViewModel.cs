@@ -55,6 +55,8 @@ namespace Mine.ViewModels
 
         public IDataStore<ItemModel> DataStore;
 
+        public int CurrentDataSource = 0;
+
         // Command to force a Load of data
         public Command LoadDatasetCommand { get; set; }
 
@@ -71,6 +73,8 @@ namespace Mine.ViewModels
 
             Dataset = new ObservableCollection<ItemModel>();
             LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
+            SetDataSource(CurrentDataSource);
+
 
             // Register the Create Message
             MessagingCenter.Subscribe<ItemCreatePage, ItemModel>(this, "Create", async (obj, data) =>
@@ -100,7 +104,7 @@ namespace Mine.ViewModels
             Dataset.Add(data);
             var result = await DataStore.CreateAsync(data);
 
-            return true;
+            return result;
         }
 
         /// <summary>
