@@ -1,13 +1,14 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using SQLite;
 using Mine.Models;
 
-namespace Mine
+namespace Mine.Services
 {
-    class DatabaseServices
+    class DatabaseServices:  IDataStore<ItemModel>
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -34,14 +35,15 @@ namespace Mine
             }
         }
 
-        public Task<List<ItemModel>> IndexAsync()
+        public Task<List<ItemModel>> IndexAsync(bool flag = false)
         {
             return Database.Table<ItemModel>().ToListAsync();
         }
 
-        public Task<int> CreateAsync(ItemModel item)
+        public Task<bool> CreateAsync(ItemModel Data)
         {
-            return Database.InsertAsync(item);
+            Database.InsertAsync(Data);
+            return Task.FromResult(true);
         }
 
         public Task<ItemModel> ReadAsync(string id)
@@ -49,14 +51,36 @@ namespace Mine
             return Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
-        public Task<int> UpdateAsync(ItemModel item)
+        public Task<bool> UpdateAsync(ItemModel Data)
         {
-            return Database.UpdateAsync(item);
+            var myRead = ReadAsync(Data.Id).GetAwaiter().GetResult();
+            if (myRead == null)
+            {
+                return Task.FromResult(false);
+
+            }
+
+            Database.UpdateAsync(Data);
+
+            return Task.FromResult(true);
+
         }
 
-        public Task<int> DeleteAsync(ItemModel item)
+        public Task<bool> DeleteAsync(string id)
         {
-            return Database.DeleteAsync(item);
+            // Check if it exists...
+            var myRead = ReadAsync(id).GetAwaiter().GetResult();
+            if (myRead == null)
+            {
+                return Task.FromResult(false);
+
+            }
+
+            // Then delete...
+
+            Database.DeleteAsync(myRead);
+            return Task.FromResult(true);
+
         }
 
         public void WipeDataList()

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
-using Xamarin.Forms;
+﻿using Mine.ViewModels;
 using System;
+using System.ComponentModel;
+using Xamarin.Forms;
 
 namespace Mine.Views
 {

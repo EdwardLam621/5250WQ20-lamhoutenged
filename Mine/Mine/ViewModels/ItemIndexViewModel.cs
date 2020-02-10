@@ -50,8 +50,8 @@ namespace Mine.ViewModels
         /// <summary>
         /// Connection to the Data store
         /// </summary>
-        public IDataStore<ItemModel> DataSource_Mock => DependencyService.Get<IDataStore<ItemModel>>();
-        public IDataStore<ItemModel> DataSource_SQL => DependencyService.Get<IDataStore<ItemModel>>();
+        public IDataStore<ItemModel> DataSource_Mock => new MockDataStore();
+        public IDataStore<ItemModel> DataSource_SQL => new DatabaseServices();
 
         public IDataStore<ItemModel> DataStore;
 
