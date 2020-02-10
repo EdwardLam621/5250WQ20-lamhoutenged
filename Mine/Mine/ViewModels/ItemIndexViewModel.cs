@@ -205,7 +205,8 @@ namespace Mine.ViewModels
 
                 foreach (var data in dataset)
                 {
-                    Dataset.Add(data);
+                    // Make a Copy of the Item Model to add to the List
+                    Dataset.Add(new ItemModel(data));
                 }
             }
             catch (Exception ex)
