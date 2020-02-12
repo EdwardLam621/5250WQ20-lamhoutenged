@@ -7,13 +7,13 @@ namespace Mine.Services
     /// Interface for data intreactions
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IDataStore<ItemModel>
+    public interface IDataStore<T>
     {
-        Task<bool> CreateAsync(ItemModel Data);
-        Task<bool> UpdateAsync(ItemModel Data);
+        Task<bool> CreateAsync(T Data);
+        Task<bool> UpdateAsync(T Data);
         Task<bool> DeleteAsync(string id);
-        Task<ItemModel> ReadAsync(string id);
-        Task<List<ItemModel>> IndexAsync(bool forceRefresh = false);
+        Task<T> ReadAsync(string id);
+        Task<List<T>> IndexAsync(bool forceRefresh = false);
         void WipeDataList();
     }
 }
