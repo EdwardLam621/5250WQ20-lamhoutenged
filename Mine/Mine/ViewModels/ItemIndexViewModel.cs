@@ -73,7 +73,6 @@ namespace Mine.ViewModels
 
             Dataset = new ObservableCollection<ItemModel>();
             LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
-            SetDataSource(CurrentDataSource);
 
 
             // Register the Create Message
