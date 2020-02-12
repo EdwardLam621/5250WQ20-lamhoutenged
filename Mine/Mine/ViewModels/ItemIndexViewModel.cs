@@ -69,6 +69,8 @@ namespace Mine.ViewModels
         /// </summary>
         public ItemIndexViewModel()
         {
+            SetDataSource(CurrentDataSource);   // Set to Mock to start with
+
             Title = "Items";
 
             Dataset = new ObservableCollection<ItemModel>();
